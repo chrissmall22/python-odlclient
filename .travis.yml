@@ -10,6 +10,3 @@ install:
 script:
   - tox
 
-notifications:
-  irc:
-    - "chat.freenode.net#opendaylight-dlux"
