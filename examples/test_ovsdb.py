@@ -15,15 +15,22 @@
 # under the License.
 import logging
 import pprint
+import os
 
 from odlclient.v2 import client as odlclient
 
 logging.basicConfig(level='DEBUG')
 
-http = odlclient.HTTPClient(
-    'http://localhost:8080',
-    username='admin',
-    password='admin')
+controller = os.getenv("ODL_CONTROLLER")
+user = os.getenv("ODL_USER")
+password = os.getenv("ODL_PASS")
+
+url = 'http://' +  controller + ':8080'
+
+
+http = odlclient.HTTPClient(url,
+    username=user,
+    password=password)
 
 client = odlclient.Client(http)
 

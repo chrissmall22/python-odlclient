@@ -14,16 +14,28 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import logging
+import os
 
 logging.basicConfig(level='DEBUG')
 
 from odlclient.v2 import client as odlclient
 
 
-http = odlclient.HTTPClient(
-    'http://localhost:8080',
-    username='admin',
-    password='admin')
+#http = odlclient.HTTPClient(
+#    'http://localhost:8080',
+#    username='admin',
+#    password='admin')
+
+
+controller = os.getenv("ODL_CONTROLLER")
+user = os.getenv("ODL_USER")
+password = os.getenv("ODL_PASS")
+
+url = 'http://' +  controller + ':8080'
+
+http = odlclient.HTTPClient(url,
+    username=user,
+    password=password)
 
 client = odlclient.Client(http)
 
