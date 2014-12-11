@@ -15,17 +15,12 @@
 #   limitations under the License.
 
 import json
-import os
-import re
 import unittest
-#PY3.3
-import io
 try:
     from unittest.mock import MagicMock
 except ImportError:
     from mock import MagicMock
 
-import httpretty
 import requests
 
 
@@ -44,45 +39,42 @@ class ClientTests(unittest.TestCase):
         response_ok.status_code = 200
         self.response_ok = response_ok
 
-
-
     def test_post(self):
         self.client.post = MagicMock(name="post",
-                                      return_value=self.response_ok)
+                                     return_value=self.response_ok)
 
         r = self.client.post('http://foo.bar', json.dumps({"some": "data"}))
 
         self.client.post.assert_called_with('http://foo.bar',
-                                             json.dumps({"some": "data"}))
+                                            json.dumps({"some": "data"}))
 
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_put(self):
         self.client.put = MagicMock(name="put",
-                                     return_value=self.response_ok)
+                                    return_value=self.response_ok)
 
         r = self.client.put('http://foo.bar', json.dumps({"some": "data"}))
 
         self.client.put.assert_called_with('http://foo.bar',
-                                            json.dumps({"some": "data"}))
+                                           json.dumps({"some": "data"}))
 
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_delete_data(self):
         self.client.delete = MagicMock(name="delete",
-                                        return_value=self.response_ok)
+                                       return_value=self.response_ok)
 
         r = self.client.delete('http://foo.bar', json.dumps({"some": "data"}))
 
         self.client.delete.assert_called_with('http://foo.bar',
-                                               json.dumps({"some": "data"}))
+                                              json.dumps({"some": "data"}))
 
         self.assertTrue(isinstance(r, requests.Response))
 
-
     def test_delete_no_data(self):
         self.client.delete = MagicMock(name="delete",
-                                        return_value=self.response_ok)
+                                       return_value=self.response_ok)
 
         r = self.client.delete('http://foo.bar')
 
@@ -92,7 +84,7 @@ class ClientTests(unittest.TestCase):
 
     def test_head(self):
         self.client.head = MagicMock(name="head",
-                                      return_value=self.response_ok)
+                                     return_value=self.response_ok)
         #self.raise_errors = MagicMock(name="raise_errors")
 
         r = self.client.head('http://foo.bar')

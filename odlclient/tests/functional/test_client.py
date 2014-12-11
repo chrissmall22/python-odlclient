@@ -14,24 +14,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from odlclient.v2 import client as odlclient
+from odlclient.tests.base import ClientTestCase
 
-import os
-import unittest
-
-
-CTL = os.getenv("ODL_CONTROLLER")
-USER = os.getenv("ODL_USER")
-PASS = os.getenv("ODL_PASS")
-
-url = 'http://' + CTL + ':8000'
+OF10_DPID = '00:00:00:00:00:00:00:03'
 
 
-class ClientTestCase(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.client = odlclient.Client(url, username=USER, password=PASS)
+class TestOfHTTPClient(ClientTestCase):
+    def setUp(self):
+        super(TestOfHTTPClient, self).setUp()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.client = None
+    def tearDown(self):
+        super(TestOfHTTPClient, self).tearDown()
