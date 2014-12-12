@@ -24,14 +24,19 @@ CTL = os.getenv("ODL_CONTROLLER")
 USER = os.getenv("ODL_USER")
 PASS = os.getenv("ODL_PASS")
 
-url = 'http://' + CTL + ':8000'
+url = 'http://' + CTL + ':8080'
 
 
 class ClientTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.client = odlclient.Client(url, username=USER, password=PASS)
+
+        http_client = odlclient.HTTPClient(url, username=USER, password=PASS)
+        cls.http_client = http_client
+
+        cls.client = odlclient.Client(http_client)
 
     @classmethod
     def tearDownClass(cls):
+        cls.http_client = None
         cls.client = None

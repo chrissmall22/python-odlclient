@@ -41,8 +41,7 @@ client = odlclient.Client(http)
 
 nodes = client.nodes.list()
 
-if nodes:
-    node = nodes[0]
+for node in nodes:
     connectors = client.nodes.list_connectors(node.type, node.id)
 
     for connector in connectors:

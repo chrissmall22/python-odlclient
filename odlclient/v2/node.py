@@ -76,12 +76,14 @@ class NodeManager(Manager):
 
     def create_connector_property(self, node_type, node_id, connector_type,
                                   connector_name, name, value, container=None):
-        url = self._url('nodeconnector', node_type, node_id, connector_name,
-                        'property', name, value, container=container)
+        url = self._url('nodeconnector', node_type, node_id, connector_type,
+                        connector_name, 'property',
+                        name, value, container=container)
         self._put(url, value)
 
     def delete_connector_property(self, node_type, node_id, connector_type,
                                   connector_name, name, value, container=None):
-        url = self._url('nodeconnector', node_type, node_id, connector_name,
-                        'property', name, value, container=container)
-        self._delete(url, value)
+        url = self._url('nodeconnector', node_type, node_id, connector_type,
+                        connector_name, 'property',
+                        name, value, container=container)
+        self._delete(url)
