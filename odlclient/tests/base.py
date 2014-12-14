@@ -20,9 +20,9 @@ import os
 import unittest
 
 
-CTL = os.getenv("ODL_CONTROLLER")
-USER = os.getenv("ODL_USER")
-PASS = os.getenv("ODL_PASS")
+CTL = os.getenv("ODL_CONTROLLER") or "localhost"
+USER = os.getenv("ODL_USER") or "admin"
+PASS = os.getenv("ODL_PASS") or "admin"
 
 url = 'http://' + CTL + ':8080'
 
