@@ -19,6 +19,7 @@ import requests
 from odlclient.openstack.common.apiclient import client
 from odlclient.v2.bridge_domain import BridgeDomainManager
 from odlclient.v2.connection_manager import ConnectionManager
+from odlclient.v2.flow import FlowManager
 from odlclient.v2.neutron import NeutronManagers
 from odlclient.v2.node import NodeManager
 from odlclient.v2.ovsdb import OvsdbManager
@@ -89,5 +90,6 @@ class Client(client.BaseClient):
         self.nodes = NodeManager(self)
         self.ovsdb = OvsdbManager(self)
         self.subnets = SubnetManager(self)
+        self.flows = FlowManager(self)
         self.staticroutes = StaticRouteManager(self)
         self.neutron = NeutronManagers(self)

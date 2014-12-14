@@ -51,6 +51,9 @@ class FlowManager(Manager):
     has_container = True
     resource_class = Flow
 
+    def list(self):
+        return self.list_flows()
+
     def list_flows(self, container=None):
         url = self._url(container=container)
         return self._list(url, response_key='flowConfig')
@@ -65,14 +68,16 @@ class FlowManager(Manager):
 
     def add_flow_json(self, node_type, node_id, name, json_flow,
                       container=None):
-        url = self._url('node', node_type, node_id, name,
-                        container=container)
+        url = self._url('node', node_type, node_id, 'staticFlow',
+                        name, container=container)
         return self._put(url, json_flow)
 
     def delete_flow(self, node_type, node_id, name, container=None):
-        url = self._url('node', node_type, node_id, name, container=container)
+        url = self._url('node', node_type, node_id, 'staticFlow',
+                        name, container=container)
         return self._delete(url)
 
     def add_flow(self, node_type, node_id, name, flow, container=None):
-        url = self._url('node', node_type, node_id, name, container=container)
+        url = self._url('node', node_type, node_id, 'staticFlow',
+                        name, container=container)
         return self._put(url, flow.json())
