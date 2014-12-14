@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class Subnet(base.Resource):
@@ -24,14 +24,13 @@ class Subnet(base.Resource):
     pass
 
 
-class SubnetManager(Manager):
+class SubnetManager(v2_base.Manager):
     base = 'controller/nb/v2/subnetservice'
     has_container = True
     resource_class = Subnet
 
     def list(self, container=None):
-        """
-        List Subnets.
+        """List Subnets.
 
         :param container: Container if any.
         """
@@ -40,7 +39,8 @@ class SubnetManager(Manager):
         return staticsubnets
 
     def get(self, name, container=None):
-        """
+        """Get Subnets
+
         :param name: Name to get
         :param container: Container if any.
         """
@@ -48,8 +48,7 @@ class SubnetManager(Manager):
         return self._get(url)
 
     def create(self, name, subnet, connectors=[], container=None):
-        """
-        Create a new Subnet.
+        """Create a new Subnet.
 
         :param name: The name of the Subnet
         :param subnet: IPvX subnet: 10.0.0.0/24.
@@ -67,8 +66,7 @@ class SubnetManager(Manager):
         self._put(url, json=json)
 
     def delete(self, name, container=None):
-        """
-        Delete a Subnet.
+        """Delete a Subnet.
 
         :param name: Name to delete
         :param container: Container if any.
@@ -77,8 +75,7 @@ class SubnetManager(Manager):
         self._delete(url)
 
     def update_ports(self, name, connectors=[], container=None):
-        """
-        Set the Node connectors of the Subnet.
+        """Set the Node connectors of the Subnet.
 
         :param name: The name of the Subnet
         :param connectors: List of connectors.

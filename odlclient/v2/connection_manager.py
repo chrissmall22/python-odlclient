@@ -14,27 +14,24 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class Connection(base.Resource):
     pass
 
 
-class ConnectionManager(Manager):
+class ConnectionManager(v2_base.Manager):
     base = 'controller/nb/v2/connectionmanager'
     resource_class = Connection
 
     def list(self):
-        """
-        List Connections
-        """
+        """List Connections."""
         url = self._url('nodes')
         return self._list(url, response_key='node')
 
     def create(self, node_id, ip_address, port, node_type=None):
-        """
-        Create / Set a management connection to a Node.
+        """Create / Set a management connection to a Node.
 
         :param node_id: Node ID
         :param ip_address: IP Address for the Connection.
@@ -49,8 +46,6 @@ class ConnectionManager(Manager):
         return self._put(url)
 
     def delete(self, node_type, node_id):
-        """
-        Delete / Unset a Connection to a Node.
-        """
+        """Delete / Unset a Connection to a Node."""
         url = self._url('node', node_type, node_id)
         self._delete(url)

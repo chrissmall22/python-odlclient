@@ -17,22 +17,22 @@ import logging
 import requests
 
 from odlclient.openstack.common.apiclient import client
-from odlclient.v2.bridge_domain import BridgeDomainManager
-from odlclient.v2.connection_manager import ConnectionManager
-from odlclient.v2.flow import FlowManager
-from odlclient.v2.neutron import NeutronManagers
-from odlclient.v2.node import NodeManager
-from odlclient.v2.ovsdb import OvsdbManager
-from odlclient.v2.staticroute import StaticRouteManager
-from odlclient.v2.subnet import SubnetManager
+from odlclient.v2 import bridge_domain
+from odlclient.v2 import connection_manager
+from odlclient.v2 import flow
+from odlclient.v2 import neutron
+from odlclient.v2 import node
+from odlclient.v2 import ovsdb
+from odlclient.v2 import staticroute
+from odlclient.v2 import subnet
 
 
 LOG = logging.getLogger(__name__)
 
 
 class HTTPClient(client.HTTPClient):
-    """
-    Modified HTTPClient to take a endpoint and doesn't use X-Auth-Token
+    """Modified HTTPClient to take a endpoint
+        and doesn't use X-Auth-Token
     """
     user_agent = "odlclient.openstack.common.apiclient"
 
@@ -85,11 +85,11 @@ class HTTPClient(client.HTTPClient):
 class Client(client.BaseClient):
     def __init__(self, *args, **kw):
         super(Client, self).__init__(*args, **kw)
-        self.bridge_domain = BridgeDomainManager(self)
-        self.connection_manager = ConnectionManager(self)
-        self.nodes = NodeManager(self)
-        self.ovsdb = OvsdbManager(self)
-        self.subnets = SubnetManager(self)
-        self.flows = FlowManager(self)
-        self.staticroutes = StaticRouteManager(self)
-        self.neutron = NeutronManagers(self)
+        self.bridge_domain = bridge_domain.BridgeDomainManager(self)
+        self.connection_manager = connection_manager.ConnectionManager(self)
+        self.nodes = node.NodeManager(self)
+        self.ovsdb = ovsdb.OvsdbManager(self)
+        self.subnets = subnet.SubnetManager(self)
+        self.flows = flow.FlowManager(self)
+        self.staticroutes = staticroute.StaticRouteManager(self)
+        self.neutron = neutron.NeutronManagers(self)

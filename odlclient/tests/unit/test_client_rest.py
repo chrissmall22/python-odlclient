@@ -15,16 +15,10 @@
 #   limitations under the License.
 
 import json
-import unittest
-try:
-    from unittest.mock import MagicMock
-except ImportError:
-    from mock import MagicMock
-
-import requests
-
-
+import mock
 from odlclient.v2 import client as odlclient
+import requests
+import unittest
 
 
 class Tests(unittest.TestCase):
@@ -40,8 +34,8 @@ class Tests(unittest.TestCase):
         self.response_ok = response_ok
 
     def test_post(self):
-        self.client.post = MagicMock(name="post",
-                                     return_value=self.response_ok)
+        self.client.post = mock.MagicMock(name="post",
+                                          return_value=self.response_ok)
 
         r = self.client.post('http://foo.bar', json.dumps({"some": "data"}))
 
@@ -51,8 +45,8 @@ class Tests(unittest.TestCase):
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_put(self):
-        self.client.put = MagicMock(name="put",
-                                    return_value=self.response_ok)
+        self.client.put = mock.MagicMock(name="put",
+                                         return_value=self.response_ok)
 
         r = self.client.put('http://foo.bar', json.dumps({"some": "data"}))
 
@@ -62,8 +56,8 @@ class Tests(unittest.TestCase):
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_delete_data(self):
-        self.client.delete = MagicMock(name="delete",
-                                       return_value=self.response_ok)
+        self.client.delete = mock.MagicMock(name="delete",
+                                            return_value=self.response_ok)
 
         r = self.client.delete('http://foo.bar', json.dumps({"some": "data"}))
 
@@ -73,8 +67,8 @@ class Tests(unittest.TestCase):
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_delete_no_data(self):
-        self.client.delete = MagicMock(name="delete",
-                                       return_value=self.response_ok)
+        self.client.delete = mock.MagicMock(name="delete",
+                                            return_value=self.response_ok)
 
         r = self.client.delete('http://foo.bar')
 
@@ -83,8 +77,8 @@ class Tests(unittest.TestCase):
         self.assertTrue(isinstance(r, requests.Response))
 
     def test_head(self):
-        self.client.head = MagicMock(name="head",
-                                     return_value=self.response_ok)
+        self.client.head = mock.MagicMock(name="head",
+                                          return_value=self.response_ok)
         #self.raise_errors = MagicMock(name="raise_errors")
 
         r = self.client.head('http://foo.bar')

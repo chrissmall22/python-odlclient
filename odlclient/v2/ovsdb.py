@@ -13,10 +13,10 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
-class OvsdbManager(Manager):
+class OvsdbManager(v2_base.Manager):
     base = 'ovsdb/nb/v2'
 
     def list(self, node_type, node_id, table_name):

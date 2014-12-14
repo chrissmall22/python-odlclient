@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class BridgeDomain(base.Resource):
@@ -23,19 +23,16 @@ class BridgeDomain(base.Resource):
         return self.name
 
 
-class BridgeDomainManager(Manager):
+class BridgeDomainManager(v2_base.Manager):
     base = 'controller/nb/v2/bridgedomain'
 
     def list(self):
-        """
-        List BridgeDomains.
-        """
+        """List BridgeDomains."""
         url = self._url('nodes')
         return self._list(url)
 
     def create(self, node_type, node_id):
-        """
-        Create a new BridgeDomain.
+        """Create a new BridgeDomain.
 
         :param node_type: Node Type.
         :param node_id: Node ID.
@@ -44,8 +41,7 @@ class BridgeDomainManager(Manager):
         self._post(url)
 
     def delete(self, node_type, node_id):
-        """
-        Delete a new BridgeDomain.
+        """Delete a new BridgeDomain.
 
         :param node_type: Node Type.
         :param node_id: Node ID.
@@ -54,8 +50,7 @@ class BridgeDomainManager(Manager):
         self._delete(url)
 
     def create_port(self, node_type, node_id, name, vlan=None):
-        """
-        Create a Port in a BridgeDomain.
+        """Create a Port in a BridgeDomain.
 
         :param node_type: Node Type.
         :param node_id: Node ID.
@@ -67,8 +62,7 @@ class BridgeDomainManager(Manager):
         self._post(url)
 
     def delete_port(self, node_type, node_id, name):
-        """
-        Delete a Port in a BridgeDomain.
+        """Delete a Port in a BridgeDomain.
 
         :param node_type: Node Type.
         :param node_id: Node ID.

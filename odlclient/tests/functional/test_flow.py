@@ -14,13 +14,13 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from odlclient.tests.base import ClientTestCase
+from odlclient.tests import base
 
 OF10_DPID = '00:00:00:00:00:00:00:03'
 INT_DPID = '3'
 
 
-class TestOfFlowManager(ClientTestCase):
+class TestOfFlowManager(base.ClientTestCase):
     def setUp(self):
         super(TestOfFlowManager, self).setUp()
 

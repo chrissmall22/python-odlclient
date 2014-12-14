@@ -13,11 +13,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from datetime import datetime
+import datetime
 import time
 
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class Node(base.Resource):
@@ -37,14 +37,16 @@ class Node(base.Resource):
     @property
     def connected_since(self):
         data = self._info['properties']['timeStamp']['value']
-        return datetime.fromtimestamp(time.mktime(time.gmtime(data / 1000)))
+        return datetime.datetime.fromtimestamp(time.mktime
+                                               (time.gmtime(
+                                                   data / 1000)))
 
 
 class NodeConnector(base.Resource):
     pass
 
 
-class NodeManager(Manager):
+class NodeManager(v2_base.Manager):
     base = 'controller/nb/v2/switchmanager'
     has_container = True
     resource_class = Node

@@ -15,13 +15,13 @@
 # under the License.
 import logging
 
-from odlclient.openstack.common.apiclient.base import ManagerWithFind
+from odlclient.openstack.common.apiclient import base
 
 
 LOG = logging.getLogger(__name__)
 
 
-class Manager(ManagerWithFind):
+class Manager(base.ManagerWithFind):
     base = None
     has_container = False
 

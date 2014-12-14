@@ -14,14 +14,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from odlclient.tests.base import ClientTestCase
+from odlclient.tests import base
 import pprint
 
 OF10_DPID = '00:00:00:00:00:00:00:03'
 INT_DPID = '3'
 
 
-class TestOfNodeManager(ClientTestCase):
+class TestOfNodeManager(base.ClientTestCase):
     def setUp(self):
         super(TestOfNodeManager, self).setUp()
 

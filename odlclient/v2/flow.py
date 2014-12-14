@@ -18,15 +18,15 @@
 import json
 
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
-from uuid import uuid1
+from odlclient.v2 import base as v2_base
+import uuid
 
 
 class Flow(base.Resource):
     @property
     def name(self):
         if self._info['name'] is None:
-            name = uuid1()
+            name = uuid.uuid1()
         else:
             name = self._info['name']
         return name
@@ -46,7 +46,7 @@ class Flow(base.Resource):
         return data
 
 
-class FlowManager(Manager):
+class FlowManager(v2_base.Manager):
     base = 'controller/nb/v2/flowprogrammer'
     has_container = True
     resource_class = Flow

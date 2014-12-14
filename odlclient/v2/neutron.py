@@ -15,7 +15,7 @@
 # under the License.
 
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class NeutronNetwork(base.Resource):
@@ -30,24 +30,19 @@ class NeutronSubnet(base.Resource):
     pass
 
 
-class NeutronBaseManager(Manager):
-    """
-    Base Class for Neutron Network/Subnet/Port Managers
-    """
+class NeutronBaseManager(v2_base.Manager):
+    """Base Class for Neutron Network/Subnet/Port Managers."""
     base = 'controller/nb/v2/neutron'
     resource = None
     singular = None
 
     def list(self):
-        """
-        List Neutron Network/Subnet/Port
-        """
+        """List Neutron Network/Subnet/Port."""
         url = self._url(self.resource)
         return self._list(url, response_key=self.resource)
 
     def create(self, data):
-        """
-        Create a new Neutron Network/Subnet/Port
+        """Create a new Neutron Network/Subnet/Port
 
         :param data: JSON data
         """
@@ -55,8 +50,7 @@ class NeutronBaseManager(Manager):
         self._post(url, data, response_key=self.singular)
 
     def get(self, uuid):
-        """
-        Get a Neutron Network/Subnet/Port
+        """Get a Neutron Network/Subnet/Port
 
         :param net_uuid: UUID of the Network/Subnet/Port
         """
@@ -64,8 +58,7 @@ class NeutronBaseManager(Manager):
         return self._get(url, response_key=self.singular)
 
     def update(self, uuid, data):
-        """
-        Update a Neutron Network/Subnet/Port
+        """Update a Neutron Network/Subnet/Port
 
         :param net_uuid: UUID of the Network/Subnet/Port
         :param data: JSON Data
@@ -74,8 +67,7 @@ class NeutronBaseManager(Manager):
         return self._put(url, data, response_key=self.singular)
 
     def delete(self, uuid):
-        """
-        Delete a new Neutron Network/Subnet/Port
+        """Delete a new Neutron Network/Subnet/Port
 
         :param net_uuid: UUID of the Network/Subnet/Port
         """

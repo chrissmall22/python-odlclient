@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from odlclient.openstack.common.apiclient import base
-from odlclient.v2.base import Manager
+from odlclient.v2 import base as v2_base
 
 
 class StaticRoute(base.Resource):
@@ -23,14 +23,13 @@ class StaticRoute(base.Resource):
         return self.name
 
 
-class StaticRouteManager(Manager):
+class StaticRouteManager(v2_base.Manager):
     base = 'controller/nb/v2/staticroute'
     has_container = True
     resource_class = StaticRoute
 
     def list(self, container=None):
-        """
-        List StaticRoutes.
+        """List StaticRoutes.
 
         :param container: Container if any.
         """
@@ -39,8 +38,7 @@ class StaticRouteManager(Manager):
         return staticroutes
 
     def get(self, name, container=None):
-        """
-        Get a StaticRoute
+        """Get a StaticRoute
 
         :param name: Name to get
         :param container: Container if any.
@@ -49,8 +47,7 @@ class StaticRouteManager(Manager):
         return self._get(url)
 
     def create(self, name, prefix, next_hop, container=None):
-        """
-        Create a StaticRoute.
+        """Create a StaticRoute.
 
         :param name: The name of the StaticRoute
         :param prefix: IPvX prefix.
@@ -67,8 +64,7 @@ class StaticRouteManager(Manager):
         self._put(url, json=json)
 
     def delete(self, name, container=None):
-        """
-        Delete a StaticRoute.
+        """Delete a StaticRoute.
 
         :param name: Name to delete
         :param container: Container if any.
