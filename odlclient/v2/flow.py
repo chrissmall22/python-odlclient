@@ -19,6 +19,7 @@ import json
 
 from odlclient.openstack.common.apiclient import base
 from odlclient.v2 import base as v2_base
+
 import uuid
 
 
@@ -66,12 +67,6 @@ class FlowManager(v2_base.Manager):
         url = self._url('node', node_type, node_id, name, container=container)
         return self._get(url)
 
-    def add_flow_json(self, node_type, node_id, name, json_flow,
-                      container=None):
-        url = self._url('node', node_type, node_id, 'staticFlow',
-                        name, container=container)
-        return self._put(url, json_flow)
-
     def delete_flow(self, node_type, node_id, name, container=None):
         url = self._url('node', node_type, node_id, 'staticFlow',
                         name, container=container)
@@ -80,4 +75,4 @@ class FlowManager(v2_base.Manager):
     def add_flow(self, node_type, node_id, name, flow, container=None):
         url = self._url('node', node_type, node_id, 'staticFlow',
                         name, container=container)
-        return self._put(url, flow.json())
+        return self._put(url, flow)

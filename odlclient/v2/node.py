@@ -70,9 +70,9 @@ class NodeManager(v2_base.Manager):
             container=container)
         self._put(url, value)
 
-    def delete_property(self, node_type, node_id, name, value, container=None):
+    def delete_property(self, node_type, node_id, name, container=None):
         url = self._url(
-            'node', node_type, node_id, 'property', name, value,
+            'node', node_type, node_id, 'property', name,
             container=container)
         self._delete(url)
 
@@ -84,8 +84,8 @@ class NodeManager(v2_base.Manager):
         self._put(url, value)
 
     def delete_connector_property(self, node_type, node_id, connector_type,
-                                  connector_name, name, value, container=None):
+                                  connector_name, name, container=None):
         url = self._url('nodeconnector', node_type, node_id, connector_type,
                         connector_name, 'property',
-                        name, value, container=container)
+                        name, container=container)
         self._delete(url)

@@ -47,10 +47,9 @@ class TestOfNodeManager(base.ClientTestCase):
         self.assertFalse(data)
 
         data2 = self.client.nodes.delete_property('OF', OF10_DPID,
-                                                  'description', 'Switch3')
+                                                  'description')
         self.assertFalse(data2)
 
-"""
     def test_connector_property(self):
         data = self.client.nodes.create_connector_property('OF', OF10_DPID,
                                                            'OF', '1',
@@ -59,8 +58,6 @@ class TestOfNodeManager(base.ClientTestCase):
         self.assertTrue(data)
 
         data2 = self.client.nodes.delete_connector_property('OF', OF10_DPID,
-                                                           'OF', '1',
-                                                           'name', 'Port1')
+                                                            'OF', '1', 'name')
         pprint.pprint(data2)
         self.assertFalse(data2)
-"""
